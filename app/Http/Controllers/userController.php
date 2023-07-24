@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use App\Factories\UserFactory;
-
+use Illuminate\Support\Facades\Validator;
 use DB;
 use App\Models\User; 
 
@@ -47,6 +47,7 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         try {
 
                 $validator = Validator::make($request->all(), [

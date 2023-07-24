@@ -2,11 +2,11 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Artisan;
 class UserTest extends TestCase
 {
     /**
@@ -19,6 +19,7 @@ class UserTest extends TestCase
     public function test_create_user()
     {
         //$this->withoutExceptionHandling();
+        Artisan::call('migrate');
 
         $data = [
             'name' => 'Test User',
@@ -26,10 +27,10 @@ class UserTest extends TestCase
             'password' => '123456788',
         ];
 
-        $response = $this->post('/users', $data);
+        $response = $this->post(route('user/store'), $data);
 
-        $response->assertRedirect('/users');
+        $response->assertStatus(302)->assertRedirect(route('allUsers'));
 
-        $this->assertDatabaseHas('users', $data);
+        $this->assertDatabaseHas('allUsers', $data);
     }
 }

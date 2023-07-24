@@ -17,5 +17,5 @@ Route::get('/', function () {
 
 });
 
-Route::post('user/store', 'userController@store');
-Route::resource('users', 'userController');
+Route::post('users',['as' => 'user/store', 'uses' => 'userController@store']);
+Route::get('users',['as' => 'allUsers', 'uses' => 'userController@show']);

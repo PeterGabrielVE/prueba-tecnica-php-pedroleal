@@ -11,7 +11,7 @@ class UserRepository
         $user = User::create($data);
 
         if (!$user) {
-            throw new \Exception("Error al crear el jugador");
+            throw new \Exception("Error al crear el usuario");
         }
 
         return $user;
