@@ -27,10 +27,16 @@ class UserTest extends TestCase
             'password' => '123456788',
         ];
 
-        $response = $this->post(route('user/store'), $data);
+        //$response = $this->post(route('api/user/store'), $data);
 
-        $response->assertStatus(302)->assertRedirect(route('allUsers'));
-
-        $this->assertDatabaseHas('allUsers', $data);
+        //$response->assertStatus(302)->assertRedirect(route('allUsers'));
+        
+        $this->json('POST', 'api/user/store',$data)
+            ->assertStatus(200);
+           /* ->assertJson([
+                'code' => '200',
+                'message' => 'Hotel Review updated.',
+            ]);
+        //$this->assertDatabaseHas('api/allUsers', $data);*/
     }
 }

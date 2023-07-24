@@ -65,6 +65,7 @@ class userController extends Controller
 
 
                 $user = $this->userFactory->create($request->all());
+                //dd($user);
                 $this->userRepository->create($user->toArray());
 
                 return response()->json([
