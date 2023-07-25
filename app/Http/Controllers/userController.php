@@ -26,7 +26,11 @@ class userController extends Controller
      */
     public function index()
     {
-        //
+        $users = $this->userRepository->getAll();
+
+        return response()->json([
+            'data' => $users
+        ]);
     }
 
     /**
@@ -101,7 +105,10 @@ class userController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = $this->userRepository->getById($id);
+        return response()->json([
+            'data' => $user
+        ]);
     }
 
     /**
@@ -113,7 +120,11 @@ class userController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        return response()->json([
+            'data' => $this->userRepository->update($id, $data)
+        ]);
     }
 
     /**
@@ -124,6 +135,8 @@ class userController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->userRepository->delete($id);
+
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }
